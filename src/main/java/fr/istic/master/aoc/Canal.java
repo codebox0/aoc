@@ -21,7 +21,7 @@ public class Canal implements AfficheurAsync, GenerateurAsync {
 	}
 
 	public Future<Integer> getValue() {
-		return null;
+		return scheduler.schedule(new GetValue(generateur), 500, TimeUnit.MILLISECONDS);
 	}
 
 }
