@@ -4,5 +4,5 @@ import java.util.concurrent.Future;
 
 public interface AfficheurAsync {
 
-	Future update(Generateur g);
+	Future<Object> update(Generateur g);
 }

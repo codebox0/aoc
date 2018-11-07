@@ -16,7 +16,7 @@ public class Canal implements AfficheurAsync, GenerateurAsync {
 
 	}
 
-	public Future update(Generateur g) {
+	public Future<Object> update(Generateur g) {
 		return scheduler.schedule(new Update(afficheur), 500, TimeUnit.MILLISECONDS);
 	}
 
