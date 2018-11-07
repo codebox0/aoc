@@ -1,5 +1,27 @@
 package fr.istic.master.aoc;
 
-public class Canal {
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+
+public class Canal implements AfficheurAsync, GenerateurAsync {
+	private static final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(10);
+	private Generateur generateur;
+	private Afficheur afficheur;
+
+	public Canal(Generateur g, Afficheur f) {
+		this.generateur = g;
+		this.afficheur = f;
+
+	}
+
+	public Future update(Generateur g) {
+		return scheduler.schedule(new Update(afficheur), 500, TimeUnit.MILLISECONDS);
+	}
+
+	public Future<Integer> getValue() {
+		return null;
+	}
 
 }
