@@ -1,4 +1,4 @@
-package fr.istic.master.aoc;
+package fr.istic.master.aoc.afficheur.interfaces;
 
 public interface Afficheur {
 

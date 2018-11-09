@@ -1,6 +1,9 @@
-package fr.istic.master.aoc;
+package fr.istic.master.aoc.afficheur;
 
 import java.util.concurrent.ExecutionException;
+
+import fr.istic.master.aoc.afficheur.interfaces.Afficheur;
+import fr.istic.master.aoc.generateur.interfaces.GenerateurAsync;
 
 public class AfficheurImpl implements Afficheur {
 
@@ -10,6 +13,7 @@ public class AfficheurImpl implements Afficheur {
 		this.canal = canal;
 	}
 
+	@Override
 	public void update() {
 		canal.getValue();
 

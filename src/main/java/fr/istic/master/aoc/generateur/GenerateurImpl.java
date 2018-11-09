@@ -1,4 +1,6 @@
-package fr.istic.master.aoc;
+package fr.istic.master.aoc.generateur;
+
+import fr.istic.master.aoc.generateur.interfaces.Generateur;
 
 public class GenerateurImpl implements Generateur {
 

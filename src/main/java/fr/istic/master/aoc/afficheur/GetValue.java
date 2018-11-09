@@ -1,6 +1,8 @@
-package fr.istic.master.aoc;
+package fr.istic.master.aoc.afficheur;
 
 import java.util.concurrent.Callable;
+
+import fr.istic.master.aoc.generateur.interfaces.Generateur;
 
 public class GetValue implements Callable<Integer> {
 
