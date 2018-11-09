@@ -7,4 +7,5 @@ import fr.istic.master.aoc.generateur.interfaces.Generateur;
 public interface AfficheurAsync {
 
 	Future<Object> update(Generateur g);
+
 }
