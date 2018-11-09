@@ -17,10 +17,12 @@ public class Canal implements AfficheurAsync, GenerateurAsync {
 	private Generateur generateur;
 	private Afficheur afficheur;
 
-	public Canal(Generateur g, Afficheur f) {
-		this.generateur = g;
-		this.afficheur = f;
+	public void setGenerateur(Generateur generateur) {
+		this.generateur = generateur;
+	}
 
+	public void setAfficheur(Afficheur afficheur) {
+		this.afficheur = afficheur;
 	}
 
 	public Future<Object> update(Generateur g) {
