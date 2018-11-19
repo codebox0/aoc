@@ -9,7 +9,6 @@ import fr.istic.master.aoc.strategie.AlgoDiffusion;
 
 public class GenerateurImpl implements Generateur {
 
-	private Integer value = new Integer(0);
 	private List<AfficheurAsync> canaux = new ArrayList<AfficheurAsync>();
 	private AlgoDiffusion algoDiffusion;
 
@@ -28,16 +27,19 @@ public class GenerateurImpl implements Generateur {
 	@Override
 	public Integer getValue(AfficheurAsync canal) {
 		System.out.println("Canal:" + canal);
-		return value;
+		return algoDiffusion.getValue(canal);
 	}
 
-	public void generationDeValeurs() {
-		value++;
-		// Utilisation de la strategie
+	@Override
+	public void majValeur() {
+		System.out.println("GenerateurImpl.majValeur()");
 		canaux.forEach(canal -> {
-			System.out.println("Diffusion de la valeur: " + value);
 			canal.update(this);
 		});
+	}
+
+	public void tick() {
+		algoDiffusion.tick();
 	}
 
 }
