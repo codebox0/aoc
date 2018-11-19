@@ -7,16 +7,14 @@ import fr.istic.master.aoc.generateur.interfaces.GenerateurAsync;
 
 public class AfficheurImpl implements Afficheur {
 
-	private GenerateurAsync canal;
 	private String name;
 
-	public AfficheurImpl(GenerateurAsync canal, String afficheurName) {
-		this.canal = canal;
+	public AfficheurImpl(String afficheurName) {
 		this.name = afficheurName;
 	}
 
 	@Override
-	public void update() {
+	public void update(GenerateurAsync canal) {
 		try {
 			System.out.println("Afficheur: " + name + " getValue: " + canal.getValue().get());
 		} catch (InterruptedException e) {
@@ -24,10 +22,6 @@ public class AfficheurImpl implements Afficheur {
 		} catch (ExecutionException e) {
 			e.printStackTrace();
 		}
-	}
-
-	public void setCanal(GenerateurAsync canal) {
-		this.canal = canal;
 	}
 
 	@Override

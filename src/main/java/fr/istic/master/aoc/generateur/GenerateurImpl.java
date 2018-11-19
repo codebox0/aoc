@@ -17,11 +17,11 @@ public class GenerateurImpl implements Generateur {
 		this.algoDiffusion = algoDiffusion;
 	}
 
-	public void addCanal(AfficheurAsync canal) {
+	public void attach(AfficheurAsync canal) {
 		canaux.add(canal);
 	}
 
-	public void removeCanal(AfficheurAsync canal) {
+	public void detach(AfficheurAsync canal) {
 		canaux.remove(canal);
 	}
 
