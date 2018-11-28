@@ -6,6 +6,6 @@ public interface AlgoDiffusion {
 
 	int getValue(AfficheurAsync canal);
 
-	void tick();
+	void execute();
 
 }

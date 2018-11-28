@@ -39,7 +39,7 @@ public class GenerateurImpl implements Generateur {
 	}
 
 	public void tick() {
-		algoDiffusion.tick();
+		algoDiffusion.execute();
 	}
 
 }
