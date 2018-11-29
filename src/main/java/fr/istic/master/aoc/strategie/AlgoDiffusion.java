@@ -1,11 +1,14 @@
 package fr.istic.master.aoc.strategie;
 
 import fr.istic.master.aoc.afficheur.interfaces.AfficheurAsync;
+import fr.istic.master.aoc.generateur.interfaces.Generateur;
 
 public interface AlgoDiffusion {
 
-	int getValue(AfficheurAsync canal);
+	void addCanal(AfficheurAsync canal);
 
-	void execute();
+	void execute(Generateur generateur, int value);
+
+	Integer getValue();
 
 }

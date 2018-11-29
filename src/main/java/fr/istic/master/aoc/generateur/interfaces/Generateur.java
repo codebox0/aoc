@@ -6,5 +6,10 @@ public interface Generateur {
 
 	Integer getValue(AfficheurAsync canal);
 
-	void majValeur();
+	void attach(AfficheurAsync canal);
+
+	void genererValeur();
+
+	void detach(AfficheurAsync canal);
+
 }

@@ -4,12 +4,12 @@ import fr.istic.master.aoc.afficheur.AfficheurImpl;
 import fr.istic.master.aoc.afficheur.interfaces.Afficheur;
 import fr.istic.master.aoc.canal.Canal;
 import fr.istic.master.aoc.generateur.GenerateurFactory;
-import fr.istic.master.aoc.generateur.GenerateurImpl;
+import fr.istic.master.aoc.generateur.interfaces.Generateur;
 import fr.istic.master.aoc.strategie.EnumAlgoDiffusion;
 
 public class Main {
 	public static void main(String[] args) throws InterruptedException {
-		GenerateurImpl generateur = GenerateurFactory.fabriqueGenerateur(EnumAlgoDiffusion.COHERENCE_SEQUENTIELLE);
+		Generateur generateur = GenerateurFactory.fabriqueGenerateur(EnumAlgoDiffusion.COHERENCE_SEQUENTIELLE);
 
 		for (int i = 0; i < 4; i++) {
 			Afficheur a = creerAfficheur(i);
@@ -18,7 +18,7 @@ public class Main {
 		}
 
 		while (true) {
-			generateur.tick();
+			generateur.genererValeur();
 			Thread.sleep(30);
 		}
 	}

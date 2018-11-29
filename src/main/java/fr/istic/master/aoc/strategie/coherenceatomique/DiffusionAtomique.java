@@ -1,48 +1,46 @@
 package fr.istic.master.aoc.strategie.coherenceatomique;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
 
 import fr.istic.master.aoc.afficheur.interfaces.AfficheurAsync;
 import fr.istic.master.aoc.generateur.interfaces.Generateur;
 import fr.istic.master.aoc.strategie.AlgoDiffusion;
-import fr.istic.master.aoc.strategie.Phase;
 
 public class DiffusionAtomique implements AlgoDiffusion {
 
-	Map<AfficheurAsync, Boolean> registre = new HashMap<>();
-	int value = 0;
-	private Generateur generateur;
-	private Phase phase = Phase.WRITE;
+	List<AfficheurAsync> canaux = new ArrayList<>();
+	private int value;
 
-	public void setGenerateur(Generateur generateur) {
-		this.generateur = generateur;
-	}
-
+	@Override
 	public void addCanal(AfficheurAsync canal) {
-		registre.put(canal, false);
+		canaux.add(canal);
 	}
 
 	@Override
-	public int getValue(AfficheurAsync canal) {
-		System.out.println("DiffusionAtomique.getValue()");
-		registre.put(canal, true);
-		Optional<Boolean> findFirst = registre.values().stream().filter(value -> value == false).findFirst();
-		if (!findFirst.isPresent()) {
-			phase = Phase.WRITE;
-		}
-
+	public Integer getValue() {
 		return value;
 	}
 
 	@Override
-	public void execute() {
-		if (phase == Phase.WRITE) {
-			value++;
-			generateur.majValeur();
-			phase = Phase.READ;
-		}
+	public void execute(Generateur generateur, int value) {
+
+		this.value = value;
+		@SuppressWarnings("rawtypes")
+		List<Future> futures = new ArrayList<>();
+		canaux.forEach(canal -> {
+			futures.add(canal.update(generateur));
+		});
+
+		futures.forEach(future -> {
+			try {
+				future.get();
+			} catch (InterruptedException | ExecutionException e) {
+				e.printStackTrace();
+			}
+		});
 	}
 
 }
