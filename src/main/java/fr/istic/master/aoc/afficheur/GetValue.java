@@ -14,7 +14,6 @@ public class GetValue implements Callable<Integer> {
 
 	@Override
 	public Integer call() throws Exception {
-		System.out.println("Method Invocation: Update");
 		return generateur.getValue();
 	}
 

@@ -19,6 +19,10 @@ public class AfficheurUI extends JLabel implements Afficheur {
 
 	private static final long serialVersionUID = 4571489304902222245L;
 
+	public AfficheurUI() {
+		setSize(20, 20);
+	}
+
 	@Override
 	public void update(GenerateurAsync canal) {
 		try {

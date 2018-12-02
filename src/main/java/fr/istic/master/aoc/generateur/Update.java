@@ -17,7 +17,6 @@ public class Update implements Callable<Object> {
 
 	@Override
 	public Object call() throws Exception {
-		System.out.println("Method Invocation: Update");
 		afficheur.update(canal);
 		return null;
 	}

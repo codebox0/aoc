@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import fr.istic.master.aoc.afficheur.interfaces.AfficheurAsync;
 import fr.istic.master.aoc.generateur.interfaces.Generateur;
@@ -39,9 +41,14 @@ public class GenerateurImpl implements Generateur, GenerateurAvecDiffusion {
 		try {
 			executeur.awaitTermination(1, TimeUnit.SECONDS);
 		} catch (InterruptedException e) {
-			e.printStackTrace();
+			Logger.getGlobal().log(Level.SEVERE, "Executor interrompu lors du changement de diffusion", e);
 		} finally {
+			if (this.algoDiffusion != null) {
+				Logger.getGlobal().log(Level.INFO, "Switch from " + this.algoDiffusion.getClass().getSimpleName()
+						+ " to " + algoDiffusion.getClass().getSimpleName());
+			}
 			this.algoDiffusion = algoDiffusion;
+			value = 0;
 			executeur = Executors.newFixedThreadPool(1);
 			mustRun = true;
 			tick();

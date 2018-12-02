@@ -9,8 +9,6 @@ import fr.istic.master.aoc.canal.CanalFactory;
 import fr.istic.master.aoc.generateur.GenerateurAvecDiffusion;
 import fr.istic.master.aoc.generateur.GenerateurFactory;
 import fr.istic.master.aoc.generateur.interfaces.Generateur;
-import fr.istic.master.aoc.strategie.EnumAlgoDiffusion;
-import fr.istic.master.aoc.strategie.coherenceatomique.AlgoDiffusionFactory;
 import fr.istic.master.aoc.ui.AfficheurUI;
 import fr.istic.master.aoc.ui.ApplicationBuilder;
 
@@ -26,11 +24,8 @@ public class MainSwing {
 			AfficheurAsync c = creerCanal(i, a);
 			generateur.attach(c);
 		}
-
-		ApplicationBuilder.build(afficheurs);
-
-		((GenerateurAvecDiffusion) generateur)
-				.setAlgoDiffusion(AlgoDiffusionFactory.build(EnumAlgoDiffusion.COHERENCE_SEQUENTIELLE));
+		GenerateurAvecDiffusion generateurAvecDiffusion = (GenerateurAvecDiffusion) generateur;
+		ApplicationBuilder.build(generateurAvecDiffusion, afficheurs);
 	}
 
 	/**
