@@ -1,6 +1,8 @@
 package fr.istic.master.aoc;
 
-import fr.istic.master.aoc.afficheur.AfficheurFactory;
+import java.util.ArrayList;
+import java.util.List;
+
 import fr.istic.master.aoc.afficheur.interfaces.Afficheur;
 import fr.istic.master.aoc.afficheur.interfaces.AfficheurAsync;
 import fr.istic.master.aoc.canal.CanalFactory;
@@ -9,25 +11,26 @@ import fr.istic.master.aoc.generateur.GenerateurFactory;
 import fr.istic.master.aoc.generateur.interfaces.Generateur;
 import fr.istic.master.aoc.strategie.EnumAlgoDiffusion;
 import fr.istic.master.aoc.strategie.coherenceatomique.AlgoDiffusionFactory;
+import fr.istic.master.aoc.ui.AfficheurUI;
+import fr.istic.master.aoc.ui.ApplicationBuilder;
 
-/**
- * Classe initialisant les afficheurs, les canaux et le générateur
- *
- * @author michel & dorian
- *
- */
-public class Main {
+public class MainSwing {
 	public static void main(String[] args) throws InterruptedException {
 		Generateur generateur = GenerateurFactory.build();
 
+		List<AfficheurUI> afficheurs = new ArrayList<>();
+
 		for (int i = 0; i < 4; i++) {
-			Afficheur a = creerAfficheur(i);
+			AfficheurUI a = creerAfficheur(i);
+			afficheurs.add(a);
 			AfficheurAsync c = creerCanal(i, a);
 			generateur.attach(c);
 		}
 
+		ApplicationBuilder.build(afficheurs);
+
 		((GenerateurAvecDiffusion) generateur)
-				.setAlgoDiffusion(AlgoDiffusionFactory.build(EnumAlgoDiffusion.COHERENCE_ATOMIQUE));
+				.setAlgoDiffusion(AlgoDiffusionFactory.build(EnumAlgoDiffusion.COHERENCE_SEQUENTIELLE));
 	}
 
 	/**
@@ -36,8 +39,8 @@ public class Main {
 	 * @param nombre
 	 * @return
 	 */
-	private static Afficheur creerAfficheur(int nombre) {
-		return AfficheurFactory.build("Afficheur " + nombre);
+	private static AfficheurUI creerAfficheur(int nombre) {
+		return new AfficheurUI();
 
 	}
 
@@ -52,5 +55,4 @@ public class Main {
 	private static AfficheurAsync creerCanal(int nombre, Afficheur afficheur) {
 		return CanalFactory.build("Canal" + nombre, afficheur);
 	}
-
 }

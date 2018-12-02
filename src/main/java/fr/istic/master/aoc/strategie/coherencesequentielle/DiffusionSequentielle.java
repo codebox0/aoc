@@ -2,15 +2,14 @@ package fr.istic.master.aoc.strategie.coherencesequentielle;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
 
 import fr.istic.master.aoc.afficheur.interfaces.AfficheurAsync;
 import fr.istic.master.aoc.generateur.interfaces.Generateur;
 import fr.istic.master.aoc.strategie.AlgoDiffusion;
 import fr.istic.master.aoc.strategie.Phase;
+import fr.istic.master.aoc.strategie.coherenceatomique.DiffusionAtomique;
 
 public class DiffusionSequentielle implements AlgoDiffusion {
 
@@ -18,10 +17,12 @@ public class DiffusionSequentielle implements AlgoDiffusion {
 	private List<AfficheurAsync> canaux = new ArrayList<>();
 	private int copyValue;
 	private Phase phase = Phase.WRITE;
+	private Generateur generateur;
 
 	@Override
-	public void addCanal(AfficheurAsync canal) {
-		canaux.add(canal);
+	public void configure(Generateur generateur, List<AfficheurAsync> canaux) {
+		this.generateur = generateur;
+		this.canaux = canaux;
 	}
 
 	@Override
@@ -30,7 +31,7 @@ public class DiffusionSequentielle implements AlgoDiffusion {
 	}
 
 	@Override
-	public void execute(Generateur generateur, int value) {
+	public void execute(int value) {
 
 		if (Phase.WRITE == phase) {
 			phase = Phase.READ;
@@ -40,19 +41,9 @@ public class DiffusionSequentielle implements AlgoDiffusion {
 
 				@Override
 				public void run() {
-					@SuppressWarnings("rawtypes")
-					List<Future> futures = new ArrayList<>();
-					canaux.forEach(canal -> {
-						futures.add(canal.update(generateur));
-					});
-
-					futures.forEach(future -> {
-						try {
-							future.get();
-						} catch (InterruptedException | ExecutionException e) {
-							e.printStackTrace();
-						}
-					});
+					DiffusionAtomique diffusionAtomique = new DiffusionAtomique();
+					diffusionAtomique.configure(generateur, canaux);
+					diffusionAtomique.execute(value);
 					phase = Phase.WRITE;
 				}
 			});

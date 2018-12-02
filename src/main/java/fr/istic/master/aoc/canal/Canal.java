@@ -38,7 +38,7 @@ public class Canal implements AfficheurAsync, GenerateurAsync {
 
 	@Override
 	public Future<Integer> getValue() {
-		return scheduler.schedule(new GetValue(this, generateur), LATENCE, TimeUnit.MILLISECONDS);
+		return scheduler.schedule(new GetValue(generateur), LATENCE, TimeUnit.MILLISECONDS);
 	}
 
 	@Override

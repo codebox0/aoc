@@ -13,10 +13,13 @@ public class DiffusionAtomique implements AlgoDiffusion {
 
 	List<AfficheurAsync> canaux = new ArrayList<>();
 	private int value;
+	private Generateur generateur;
 
 	@Override
-	public void addCanal(AfficheurAsync canal) {
-		canaux.add(canal);
+	public void configure(Generateur generateur, List<AfficheurAsync> canaux) {
+		this.generateur = generateur;
+		this.canaux = canaux;
+
 	}
 
 	@Override
@@ -25,7 +28,7 @@ public class DiffusionAtomique implements AlgoDiffusion {
 	}
 
 	@Override
-	public void execute(Generateur generateur, int value) {
+	public void execute(int value) {
 
 		this.value = value;
 		@SuppressWarnings("rawtypes")
