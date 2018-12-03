@@ -1,19 +1,16 @@
-package fr.istic.master.aoc.strategie.coherencesequentielle;
+package fr.istic.master.aoc.diffusion;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import fr.istic.master.aoc.afficheur.interfaces.AfficheurAsync;
 import fr.istic.master.aoc.generateur.interfaces.Generateur;
-import fr.istic.master.aoc.strategie.AlgoDiffusion;
-import fr.istic.master.aoc.strategie.Phase;
-import fr.istic.master.aoc.strategie.coherenceatomique.DiffusionAtomique;
 
 public class DiffusionSequentielle implements AlgoDiffusion {
 
-	private static final Executor executor = Executors.newFixedThreadPool(1);
+	private ExecutorService executor;
 	private List<AfficheurAsync> canaux = new ArrayList<>();
 	private int copyValue;
 	private Phase phase = Phase.WRITE;
@@ -23,6 +20,7 @@ public class DiffusionSequentielle implements AlgoDiffusion {
 	public void configure(Generateur generateur, List<AfficheurAsync> canaux) {
 		this.generateur = generateur;
 		this.canaux = canaux;
+		executor = Executors.newFixedThreadPool(1);
 	}
 
 	@Override
@@ -51,4 +49,8 @@ public class DiffusionSequentielle implements AlgoDiffusion {
 
 	}
 
+	@Override
+	public void shutdown() {
+		executor.shutdown();
+	}
 }

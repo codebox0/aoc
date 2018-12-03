@@ -9,8 +9,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import fr.istic.master.aoc.afficheur.interfaces.AfficheurAsync;
+import fr.istic.master.aoc.diffusion.AlgoDiffusion;
 import fr.istic.master.aoc.generateur.interfaces.Generateur;
-import fr.istic.master.aoc.strategie.AlgoDiffusion;
 
 public class GenerateurImpl implements Generateur, GenerateurAvecDiffusion {
 
@@ -36,22 +36,37 @@ public class GenerateurImpl implements Generateur, GenerateurAvecDiffusion {
 	}
 
 	@Override
-	public void setAlgoDiffusion(AlgoDiffusion algoDiffusion) {
+	public void setAlgoDiffusion(AlgoDiffusion nouvelAlgoDiffusion) {
+
+		shutdownGenerateur();
+
+		switchAlgoDiffusion(nouvelAlgoDiffusion);
+
+		startGenerateur();
+	}
+
+	private void switchAlgoDiffusion(AlgoDiffusion nouvelAlgoDiffusion) {
+		if (this.algoDiffusion != null) {
+			algoDiffusion.shutdown();
+			Logger.getGlobal().log(Level.INFO, "Switch from " + this.algoDiffusion.getClass().getSimpleName() + " to "
+					+ nouvelAlgoDiffusion.getClass().getSimpleName());
+		}
+		algoDiffusion = nouvelAlgoDiffusion;
+	}
+
+	private void startGenerateur() {
+		value = 0;
+		executeur = Executors.newFixedThreadPool(1);
+		mustRun = true;
+		tick();
+	}
+
+	private void shutdownGenerateur() {
 		mustRun = false;
 		try {
 			executeur.awaitTermination(1, TimeUnit.SECONDS);
 		} catch (InterruptedException e) {
-			Logger.getGlobal().log(Level.SEVERE, "Executor interrompu lors du changement de diffusion", e);
-		} finally {
-			if (this.algoDiffusion != null) {
-				Logger.getGlobal().log(Level.INFO, "Switch from " + this.algoDiffusion.getClass().getSimpleName()
-						+ " to " + algoDiffusion.getClass().getSimpleName());
-			}
-			this.algoDiffusion = algoDiffusion;
-			value = 0;
-			executeur = Executors.newFixedThreadPool(1);
-			mustRun = true;
-			tick();
+			e.printStackTrace();
 		}
 	}
 
@@ -59,13 +74,14 @@ public class GenerateurImpl implements Generateur, GenerateurAvecDiffusion {
 	public void tick() {
 
 		final Generateur generateur = this;
+		algoDiffusion.configure(generateur, canaux);
+
 		executeur.execute(new Runnable() {
 
 			@Override
 			public void run() {
 				while (mustRun) {
 					value++;
-					algoDiffusion.configure(generateur, canaux);
 					algoDiffusion.execute(value);
 					try {
 						Thread.sleep(30);

@@ -1,4 +1,4 @@
-package fr.istic.master.aoc.strategie.coherenceatomique;
+package fr.istic.master.aoc.diffusion;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,7 +7,6 @@ import java.util.concurrent.Future;
 
 import fr.istic.master.aoc.afficheur.interfaces.AfficheurAsync;
 import fr.istic.master.aoc.generateur.interfaces.Generateur;
-import fr.istic.master.aoc.strategie.AlgoDiffusion;
 
 public class DiffusionAtomique implements AlgoDiffusion {
 
@@ -46,4 +45,8 @@ public class DiffusionAtomique implements AlgoDiffusion {
 		});
 	}
 
+	@Override
+	public void shutdown() {
+		// NE RIEN FAIRE
+	}
 }

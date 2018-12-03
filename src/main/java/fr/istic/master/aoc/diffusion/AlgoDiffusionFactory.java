@@ -1,8 +1,4 @@
-package fr.istic.master.aoc.strategie.coherenceatomique;
-
-import fr.istic.master.aoc.strategie.AlgoDiffusion;
-import fr.istic.master.aoc.strategie.EnumAlgoDiffusion;
-import fr.istic.master.aoc.strategie.coherencesequentielle.DiffusionSequentielle;
+package fr.istic.master.aoc.diffusion;
 
 public class AlgoDiffusionFactory {
 
@@ -12,11 +8,11 @@ public class AlgoDiffusionFactory {
 		case COHERENCE_ATOMIQUE:
 			diffusion = new DiffusionAtomique();
 			break;
-		case COHERENCE_CAUSALE:
-			diffusion = new DiffusionSequentielle();
-			break;
 		case COHERENCE_SEQUENTIELLE:
 			diffusion = new DiffusionSequentielle();
+			break;
+		case COHERENCE_CAUSALE:
+			diffusion = new DiffusionCausale();
 			break;
 		default:
 			break;

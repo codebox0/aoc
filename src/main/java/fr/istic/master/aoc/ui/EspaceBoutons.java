@@ -6,9 +6,9 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JPanel;
 
+import fr.istic.master.aoc.diffusion.AlgoDiffusionFactory;
+import fr.istic.master.aoc.diffusion.EnumAlgoDiffusion;
 import fr.istic.master.aoc.generateur.GenerateurAvecDiffusion;
-import fr.istic.master.aoc.strategie.EnumAlgoDiffusion;
-import fr.istic.master.aoc.strategie.coherenceatomique.AlgoDiffusionFactory;
 
 public class EspaceBoutons extends JPanel implements ActionListener {
 

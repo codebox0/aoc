@@ -1,4 +1,4 @@
-package fr.istic.master.aoc.strategie;
+package fr.istic.master.aoc.diffusion;
 
 import java.util.List;
 
@@ -19,5 +19,7 @@ public interface AlgoDiffusion {
 	void configure(Generateur generateur, List<AfficheurAsync> canaux);
 
 	void execute(int value);
+
+	void shutdown();
 
 }

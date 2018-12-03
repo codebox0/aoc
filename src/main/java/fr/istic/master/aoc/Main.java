@@ -4,11 +4,11 @@ import fr.istic.master.aoc.afficheur.AfficheurFactory;
 import fr.istic.master.aoc.afficheur.interfaces.Afficheur;
 import fr.istic.master.aoc.afficheur.interfaces.AfficheurAsync;
 import fr.istic.master.aoc.canal.CanalFactory;
+import fr.istic.master.aoc.diffusion.AlgoDiffusionFactory;
+import fr.istic.master.aoc.diffusion.EnumAlgoDiffusion;
 import fr.istic.master.aoc.generateur.GenerateurAvecDiffusion;
 import fr.istic.master.aoc.generateur.GenerateurFactory;
 import fr.istic.master.aoc.generateur.interfaces.Generateur;
-import fr.istic.master.aoc.strategie.EnumAlgoDiffusion;
-import fr.istic.master.aoc.strategie.coherenceatomique.AlgoDiffusionFactory;
 
 /**
  * Classe initialisant les afficheurs, les canaux et le générateur

@@ -1,6 +1,6 @@
 package fr.istic.master.aoc.generateur;
 
-import fr.istic.master.aoc.strategie.AlgoDiffusion;
+import fr.istic.master.aoc.diffusion.AlgoDiffusion;
 
 public interface GenerateurAvecDiffusion {
 

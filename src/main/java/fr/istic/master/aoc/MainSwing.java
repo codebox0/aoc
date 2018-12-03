@@ -19,7 +19,7 @@ public class MainSwing {
 		List<AfficheurUI> afficheurs = new ArrayList<>();
 
 		for (int i = 0; i < 4; i++) {
-			AfficheurUI a = creerAfficheur(i);
+			AfficheurUI a = creerAfficheur();
 			afficheurs.add(a);
 			AfficheurAsync c = creerCanal(i, a);
 			generateur.attach(c);
@@ -34,7 +34,7 @@ public class MainSwing {
 	 * @param nombre
 	 * @return
 	 */
-	private static AfficheurUI creerAfficheur(int nombre) {
+	private static AfficheurUI creerAfficheur() {
 		return new AfficheurUI();
 
 	}

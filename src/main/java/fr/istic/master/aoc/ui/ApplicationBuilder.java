@@ -8,9 +8,13 @@ import javax.swing.ButtonGroup;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 
+import fr.istic.master.aoc.diffusion.EnumAlgoDiffusion;
 import fr.istic.master.aoc.generateur.GenerateurAvecDiffusion;
-import fr.istic.master.aoc.strategie.EnumAlgoDiffusion;
 
+/**
+ * @author michel
+ *
+ */
 public class ApplicationBuilder {
 
 	public static Fenetre build(GenerateurAvecDiffusion generateur, List<AfficheurUI> afficheurs) {

@@ -20,7 +20,7 @@ import fr.istic.master.aoc.generateur.interfaces.GenerateurAsync;
  */
 public class Canal implements AfficheurAsync, GenerateurAsync {
 	private static final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(10);
-	private static final int LATENCE = (int) (Math.random() * 900 + 100);
+	private int latence = 100;
 	private Afficheur afficheur;
 	private String name;
 	private Generateur generateur;
@@ -28,17 +28,18 @@ public class Canal implements AfficheurAsync, GenerateurAsync {
 	public Canal(String name, Afficheur afficheur) {
 		this.name = name;
 		this.afficheur = afficheur;
+		this.latence = (int) (Math.random() * 900 + 100);
 	}
 
 	@Override
 	public Future<Object> update(Generateur g) {
 		this.generateur = g;
-		return scheduler.schedule(new Update(this, afficheur), LATENCE, TimeUnit.MILLISECONDS);
+		return scheduler.schedule(new Update(this, afficheur), latence, TimeUnit.MILLISECONDS);
 	}
 
 	@Override
 	public Future<Integer> getValue() {
-		return scheduler.schedule(new GetValue(generateur), LATENCE, TimeUnit.MILLISECONDS);
+		return scheduler.schedule(new GetValue(generateur), latence, TimeUnit.MILLISECONDS);
 	}
 
 	@Override
