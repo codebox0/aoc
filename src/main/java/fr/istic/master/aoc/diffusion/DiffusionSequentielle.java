@@ -8,6 +8,15 @@ import java.util.concurrent.Executors;
 import fr.istic.master.aoc.afficheur.interfaces.AfficheurAsync;
 import fr.istic.master.aoc.generateur.interfaces.Generateur;
 
+/**
+ * 
+ * Implémentation de la stratégie de diffusion séquentielle. Diffuse une copie
+ * de la valeur du générateur à chaque fois que tous les afficheurs sont à jour
+ * avec cette copie. Les afficheurs sont mis à jour avec une diffusion atomique.
+ * 
+ * @author michel & dorian
+ *
+ */
 public class DiffusionSequentielle implements AlgoDiffusion {
 
 	private ExecutorService executor;

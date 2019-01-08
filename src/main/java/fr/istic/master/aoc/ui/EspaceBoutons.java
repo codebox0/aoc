@@ -8,8 +8,14 @@ import javax.swing.JPanel;
 
 import fr.istic.master.aoc.diffusion.AlgoDiffusionFactory;
 import fr.istic.master.aoc.diffusion.EnumAlgoDiffusion;
-import fr.istic.master.aoc.generateur.GenerateurAvecDiffusion;
+import fr.istic.master.aoc.generateur.interfaces.GenerateurAvecDiffusion;
 
+/**
+ * Panel recevant les boutons permettant de changer les stratégies de diffusion
+ *  
+ * @author michel & dorian
+ *
+ */
 public class EspaceBoutons extends JPanel implements ActionListener {
 
 	private static final long serialVersionUID = 3610406479192715806L;

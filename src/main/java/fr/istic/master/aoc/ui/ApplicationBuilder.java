@@ -1,5 +1,6 @@
 package fr.istic.master.aoc.ui;
 
+import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.util.List;
@@ -8,10 +9,14 @@ import javax.swing.ButtonGroup;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 
+import fr.istic.master.aoc.afficheur.AfficheurUI;
 import fr.istic.master.aoc.diffusion.EnumAlgoDiffusion;
-import fr.istic.master.aoc.generateur.GenerateurAvecDiffusion;
+import fr.istic.master.aoc.generateur.interfaces.GenerateurAvecDiffusion;
 
 /**
+ * 
+ * Construction de l'IHM
+ * 
  * @author michel
  *
  */
@@ -33,7 +38,9 @@ public class ApplicationBuilder {
 	private static void buildAfficheurs(List<AfficheurUI> afficheurs, Fenetre fenetre) {
 		JPanel espaceAfficheurs = new JPanel(new GridLayout(2, 2));
 		afficheurs.forEach(afficheur -> espaceAfficheurs.add(afficheur));
-		fenetre.setEspaceAfficheurs(espaceAfficheurs);
+		
+		espaceAfficheurs.setBounds(50, 0, 100, 50);
+		fenetre.add(espaceAfficheurs, BorderLayout.CENTER);
 	}
 
 	private static void buildBoutons(Fenetre fenetre, GenerateurAvecDiffusion generateur) {
@@ -61,6 +68,9 @@ public class ApplicationBuilder {
 		sequentielle.addActionListener(espaceBoutons);
 		causale.addActionListener(espaceBoutons);
 
-		fenetre.setEspaceBoutons(espaceBoutons);
+		espaceBoutons.setBounds(0, 0, 50, 50);
+		fenetre.add(espaceBoutons, BorderLayout.WEST);
+
+		
 	}
 }

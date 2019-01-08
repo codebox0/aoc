@@ -8,9 +8,17 @@ import java.util.concurrent.Future;
 import fr.istic.master.aoc.afficheur.interfaces.AfficheurAsync;
 import fr.istic.master.aoc.generateur.interfaces.Generateur;
 
+/**
+ * 
+ * Implémentation de la stratégie de diffusion atomique. Ne diffuse pas la valeur
+ * suivante du générateur tant que tous les afficheurs ne sont pas à jour.
+ * 
+ * @author michel & dorian
+ *
+ */
 public class DiffusionAtomique implements AlgoDiffusion {
 
-	List<AfficheurAsync> canaux = new ArrayList<>();
+	private List<AfficheurAsync> canaux = new ArrayList<>();
 	private int value;
 	private Generateur generateur;
 

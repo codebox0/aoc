@@ -12,6 +12,16 @@ import fr.istic.master.aoc.afficheur.interfaces.AfficheurAsync;
 import fr.istic.master.aoc.generateur.CopieGenerateur;
 import fr.istic.master.aoc.generateur.interfaces.Generateur;
 
+/**
+ * 
+ * Diffuse à chaque canal une liste de copie de générateur horodaté. Cette liste
+ * est représentée par une file de type FIFO qui est dépilée par un thread dont
+ * le rôle est de faire la mise à jour de la valeur au travers du canal.
+ * L'implémentation Java utilisée est de type ExecutorService.
+ * 
+ * @author michel & dorian
+ *
+ */
 public class DiffusionCausale implements AlgoDiffusion {
 
 	private final Map<AfficheurAsync, ExecutorService> executors = new HashMap<>();
@@ -38,7 +48,9 @@ public class DiffusionCausale implements AlgoDiffusion {
 			public void run() {
 				try {
 					canal.update(copie).get();
-				} catch (InterruptedException | ExecutionException e) {
+				} catch (InterruptedException e) {
+					System.out.println("Thread interrompu pendant son exécution");
+				} catch (ExecutionException e) {
 					e.printStackTrace();
 				}
 			}

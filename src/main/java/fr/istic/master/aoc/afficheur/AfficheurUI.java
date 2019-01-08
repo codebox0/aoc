@@ -1,4 +1,4 @@
-package fr.istic.master.aoc.ui;
+package fr.istic.master.aoc.afficheur;
 
 import java.util.concurrent.ExecutionException;
 import java.util.logging.Level;

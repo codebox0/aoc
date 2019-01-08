@@ -11,7 +11,17 @@ import java.util.logging.Logger;
 import fr.istic.master.aoc.afficheur.interfaces.AfficheurAsync;
 import fr.istic.master.aoc.diffusion.AlgoDiffusion;
 import fr.istic.master.aoc.generateur.interfaces.Generateur;
+import fr.istic.master.aoc.generateur.interfaces.GenerateurAvecDiffusion;
 
+/**
+ * 
+ * Classe d'implémentation de l'interface Générateur. On exprime via l'interface
+ * GenerateurAvecDiffusion le fait de pouvoir changer à la volée la stratégie de
+ * diffusion.
+ * 
+ * @author michel & dorian
+ *
+ */
 public class GenerateurImpl implements Generateur, GenerateurAvecDiffusion {
 
 	private List<AfficheurAsync> canaux = new ArrayList<AfficheurAsync>();
